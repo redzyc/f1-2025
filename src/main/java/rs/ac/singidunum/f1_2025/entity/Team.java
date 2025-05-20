@@ -1,4 +1,4 @@
-package entity;
+package rs.ac.singidunum.f1_2025.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,45 +8,42 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name= "driver")
+@Table(name= "team")
 @NoArgsConstructor
 @Setter
 @Getter
-public class Driver {
+public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="driver_id")
+    @Column(name="team_id")
     private Integer id;
 
     @Column(nullable = false)
-    private String first_name;
+    private String name;
 
     @Column(nullable = false)
-    private String last_name;
+    private String country;
 
     @Column(nullable = false)
-    private Integer driver_number;
+    private Integer founded_year;
 
     @Column(nullable = false)
-    private String nationality;
+    private String team_chef;
 
     @Column(nullable = false)
-    private LocalDateTime date_of_birth;
+    private Integer championships;
 
     @Column(nullable = false)
-    private Integer debut_year;
+    private String base_location;
 
     @Column(nullable = false)
-    private Integer world_titles;
+    private String logo_url;
 
     @Column(nullable = false)
-    private String profile_image;
+    private String engine_supplier;
 
 
-    private Integer team_id;
-
-
-
-
+    @Column(nullable = false)
+    private String car_name;
 
 }

@@ -1,13 +1,11 @@
-package entity;
+package rs.ac.singidunum.f1_2025.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cglib.core.Local;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 enum RaceType {
     SPRINT,
