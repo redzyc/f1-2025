@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.f1_2025.entity.Driver;
 import rs.ac.singidunum.f1_2025.repo.DriverRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,7 @@ public class DriverController {
 
     @GetMapping
     public List<Driver> getDrivers(){
-        return repository.findAll();
+        return repository.findAllByDeletedAtNull();
     }
     @GetMapping(path = "/{id}")
     public ResponseEntity<Driver> getDriverById(@PathVariable Integer id){
@@ -28,33 +29,34 @@ public class DriverController {
     @PostMapping
     public Driver saveDriver(@RequestBody Driver model) {
         Driver driver = new Driver();
-        driver.setFirst_name(model.getFirst_name());
-        driver.setDriver_number(model.getDriver_number());
+        driver.setFirstName(model.getFirstName());
+        driver.setDriverNumber(model.getDriverNumber());
         driver.setNationality(model.getNationality());
-        driver.setDebut_year(model.getDebut_year());
-        driver.setLast_name(model.getLast_name());
-        driver.setWorld_titles(model.getWorld_titles());
-        driver.setProfile_image(model.getProfile_image());
-        driver.setTeam_id(model.getTeam_id());
+        driver.setDebutYear(model.getDebutYear());
+        driver.setLastName(model.getLastName());
+        driver.setWorldTitles(model.getWorldTitles());
+        driver.setProfileImage(model.getProfileImage());
+        driver.setTeamId(model.getTeamId());
         return repository.save(driver);
     }
     @PutMapping(path = "/{id}")
     public Driver updateDriver(@PathVariable Integer id, @RequestBody Driver model) {
         Driver driver = repository.findById(id).orElseThrow();
-        driver.setFirst_name(model.getFirst_name());
-        driver.setDriver_number(model.getDriver_number());
+        driver.setFirstName(model.getFirstName());
+        driver.setDriverNumber(model.getDriverNumber());
         driver.setNationality(model.getNationality());
-        driver.setDebut_year(model.getDebut_year());
-        driver.setLast_name(model.getLast_name());
-        driver.setWorld_titles(model.getWorld_titles());
-        driver.setProfile_image(model.getProfile_image());
-        driver.setTeam_id(model.getTeam_id());
+        driver.setDebutYear(model.getDebutYear());
+        driver.setLastName(model.getLastName());
+        driver.setWorldTitles(model.getWorldTitles());
+        driver.setProfileImage(model.getProfileImage());
+        driver.setTeamId(model.getTeamId());
         return repository.save(driver);
     }
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void  deleteDriver(@PathVariable Integer id, @RequestBody Driver model) {
         Driver driver = repository.findById(id).orElseThrow();
+        driver.setDeletedAt(LocalDateTime.now());
         repository.save(driver);
     }
 }
