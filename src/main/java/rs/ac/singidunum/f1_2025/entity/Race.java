@@ -36,19 +36,19 @@ public class Race {
     private LocalDateTime date;
 
     @Column(nullable = false)
-    private LocalDateTime start_time;
+    private LocalDateTime startTime;
 
     @Column(nullable = false)
-    private BigDecimal lap_length_km;
+    private BigDecimal lapLengthKm;
 
     @Column(nullable = false)
-    private Integer lap_count;
+    private Integer lapCount;
 
     @Column(nullable = false)
-    private BigDecimal total_distance_km;
+    private BigDecimal totalDistanceKm;
 
     @Column(nullable = false)
-    private String track_type;
+    private String trackType;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

@@ -28,9 +28,9 @@ public class Result {
     @Column(name="result_id")
     private Integer id;
 
-    private Integer driver_id;
+    private Integer driverId;
 
-    private Integer race_id;
+    private Integer raceId;
 
     @Column(nullable = false)
     private Integer position;
@@ -39,16 +39,16 @@ public class Result {
     private Integer points;
 
     @Column(nullable = false)
-    private Integer starting_position;
+    private Integer startingPosition;
 
     @Column(nullable = false)
-    private Integer laps_completed;
+    private Integer lapsCompleted;
 
     @Column(nullable = false)
-    private Integer pit_stops;
+    private Integer pitStops;
 
     @Column(nullable = false)
-    private String time_gap;
+    private String timeGap;
 
     @Column(nullable = false)
     private ResultStatus status;

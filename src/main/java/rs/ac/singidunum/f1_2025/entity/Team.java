@@ -26,26 +26,26 @@ public class Team {
     private String country;
 
     @Column(nullable = false)
-    private Integer founded_year;
+    private Integer foundedYear;
 
     @Column(nullable = false)
-    private String team_chef;
+    private String teamChef;
 
     @Column(nullable = false)
     private Integer championships;
 
     @Column(nullable = false)
-    private String base_location;
+    private String baseLocation;
 
     @Column(nullable = false)
-    private String logo_url;
+    private String logoUrl;
 
     @Column(nullable = false)
-    private String engine_supplier;
+    private String engineSupplier;
 
 
     @Column(nullable = false)
-    private String car_name;
+    private String carName;
 
     @JsonIgnore
     private LocalDateTime deletedAt;

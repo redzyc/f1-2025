@@ -20,31 +20,31 @@ public class Driver {
     private Integer id;
 
     @Column(nullable = false)
-    private String first_name;
+    private String firstName;
 
     @Column(nullable = false)
-    private String last_name;
+    private String lastName;
 
     @Column(nullable = false)
-    private Integer driver_number;
+    private Integer driverNumber;
 
     @Column(nullable = false)
     private String nationality;
 
     @Column(nullable = false)
-    private LocalDateTime date_of_birth;
+    private LocalDateTime dateOfBirth;
 
     @Column(nullable = false)
-    private Integer debut_year;
+    private Integer debutYear;
 
     @Column(nullable = false)
-    private Integer world_titles;
+    private Integer worldTitles;
 
     @Column(nullable = false)
-    private String profile_image;
+    private String profileImage;
 
 
-    private Integer team_id;
+    private Integer teamId;
 
     @JsonIgnore
     private LocalDateTime deletedAt;
