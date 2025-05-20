@@ -1,5 +1,6 @@
 package rs.ac.singidunum.f1_2025.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,9 @@ public class Driver {
 
 
     private Integer team_id;
+
+    @JsonIgnore
+    private LocalDateTime deletedAt;
 
 
 

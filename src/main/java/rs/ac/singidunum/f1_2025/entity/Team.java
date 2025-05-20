@@ -1,5 +1,6 @@
 package rs.ac.singidunum.f1_2025.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,5 +46,8 @@ public class Team {
 
     @Column(nullable = false)
     private String car_name;
+
+    @JsonIgnore
+    private LocalDateTime deletedAt;
 
 }

@@ -1,5 +1,6 @@
 package rs.ac.singidunum.f1_2025.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,5 +53,8 @@ public class Race {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private RaceType raceType;
+
+    @JsonIgnore
+    private LocalDateTime deletedAt;
 
 }
