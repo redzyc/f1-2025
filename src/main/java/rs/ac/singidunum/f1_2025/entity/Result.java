@@ -45,9 +45,7 @@ public class Result {
     private Integer pitStops;
 
     @Column(nullable = false)
-    private String timeGap;
-
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private ResultStatus status;
 
     @JsonIgnore

@@ -6,11 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.sound.midi.Track;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 enum RaceType {
     SPRINT,
     RACE
+}
+enum TrackType {
+    STREET,
+    PERMANENT,
+    HYBRID
 }
 @Entity
 @Table(name= "race")
@@ -33,10 +39,8 @@ public class Race {
     private String country;
 
     @Column(nullable = false)
-    private LocalDateTime date;
+    private LocalDateTime raceDate;
 
-    @Column(nullable = false)
-    private LocalDateTime startTime;
 
     @Column(nullable = false)
     private BigDecimal lapLengthKm;
@@ -45,10 +49,8 @@ public class Race {
     private Integer lapCount;
 
     @Column(nullable = false)
-    private BigDecimal totalDistanceKm;
-
-    @Column(nullable = false)
-    private String trackType;
+    @Enumerated(EnumType.STRING)
+    private TrackType trackType;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

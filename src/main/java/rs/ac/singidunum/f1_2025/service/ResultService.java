@@ -2,14 +2,9 @@ package rs.ac.singidunum.f1_2025.service;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.f1_2025.entity.Result;
-import rs.ac.singidunum.f1_2025.entity.Team;
 import rs.ac.singidunum.f1_2025.repo.ResultRepository;
-import rs.ac.singidunum.f1_2025.repo.TeamRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,7 +30,6 @@ public class ResultService {
         result.setStatus(model.getStatus());
         result.setLapsCompleted(model.getLapsCompleted());
         result.setPitStops(model.getPitStops());
-        result.setTimeGap(model.getTimeGap());
         result.setStatus(model.getStatus());
         return repository.save(result);
     }
@@ -47,7 +41,6 @@ public class ResultService {
         result.setStatus(model.getStatus());
         result.setLapsCompleted(model.getLapsCompleted());
         result.setPitStops(model.getPitStops());
-        result.setTimeGap(model.getTimeGap());
         result.setStatus(model.getStatus());
         return repository.save(result);
     }

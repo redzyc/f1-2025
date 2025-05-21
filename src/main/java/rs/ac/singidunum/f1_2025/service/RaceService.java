@@ -2,14 +2,9 @@ package rs.ac.singidunum.f1_2025.service;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 import rs.ac.singidunum.f1_2025.entity.Race;
-import rs.ac.singidunum.f1_2025.entity.Team;
 import rs.ac.singidunum.f1_2025.repo.RaceRepository;
-import rs.ac.singidunum.f1_2025.repo.TeamRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,11 +28,9 @@ public class RaceService {
         race.setName(model.getName());
         race.setLocation(model.getLocation());
         race.setCountry(model.getCountry());
-        race.setDate(model.getDate());
-        race.setStartTime(model.getStartTime());
-        race.setLapLengthKm(model.getTotalDistanceKm());
+        race.setRaceDate(model.getRaceDate());
+        race.setLapLengthKm(model.getLapLengthKm());
         race.setLapCount(model.getLapCount());
-        race.setTotalDistanceKm(model.getTotalDistanceKm());
         race.setTrackType(model.getTrackType());
         return repository.save(race);
     }
@@ -46,11 +39,9 @@ public class RaceService {
         race.setName(model.getName());
         race.setLocation(model.getLocation());
         race.setCountry(model.getCountry());
-        race.setDate(model.getDate());
-        race.setStartTime(model.getStartTime());
-        race.setLapLengthKm(model.getTotalDistanceKm());
+        race.setRaceDate(model.getRaceDate());
+        race.setLapLengthKm(model.getLapLengthKm());
         race.setLapCount(model.getLapCount());
-        race.setTotalDistanceKm(model.getTotalDistanceKm());
         race.setTrackType(model.getTrackType());
         return repository.save(race);
     }
