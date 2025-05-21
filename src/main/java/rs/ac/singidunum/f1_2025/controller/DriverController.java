@@ -10,7 +10,7 @@ import rs.ac.singidunum.f1_2025.service.DriverService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/driver")
+@RequestMapping(path = "/api/drivers")
 @CrossOrigin
 @RequiredArgsConstructor
 public class DriverController {

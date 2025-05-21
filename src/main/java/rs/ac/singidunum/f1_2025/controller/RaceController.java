@@ -10,7 +10,7 @@ import rs.ac.singidunum.f1_2025.service.RaceService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/race")
+@RequestMapping(path = "/api/races")
 @CrossOrigin
 @RequiredArgsConstructor
 public class RaceController {

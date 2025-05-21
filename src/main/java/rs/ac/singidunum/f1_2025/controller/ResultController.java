@@ -10,7 +10,7 @@ import rs.ac.singidunum.f1_2025.service.ResultService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/result")
+@RequestMapping(path = "/api/results")
 @CrossOrigin
 @RequiredArgsConstructor
 public class ResultController {
