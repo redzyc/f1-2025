@@ -36,9 +36,6 @@ public class Result {
     private Integer position;
 
     @Column(nullable = false)
-    private Integer points;
-
-    @Column(nullable = false)
     private Integer startingPosition;
 
     @Column(nullable = false)
