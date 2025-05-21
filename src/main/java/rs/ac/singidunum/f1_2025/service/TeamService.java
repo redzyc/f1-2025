@@ -25,28 +25,28 @@ public class TeamService {
 
     public Team createTeam(Team model) {
         Team team = new Team();
-        team.setBaseLocation(team.getBaseLocation());
-        team.setTeamChef(team.getTeamChef());
-        team.setChampionships(team.getChampionships());
-        team.setCountry(team.getCountry());
-        team.setCarName(team.getCarName());
-        team.setEngineSupplier(team.getEngineSupplier());
-        team.setName(team.getName());
-        team.setLogoUrl(team.getLogoUrl());
+        team.setBaseLocation(model.getBaseLocation());
+        team.setTeamChef(model.getTeamChef());
+        team.setChampionships(model.getChampionships());
+        team.setCountry(model.getCountry());
+        team.setCarName(model.getCarName());
+        team.setEngineSupplier(model.getEngineSupplier());
+        team.setName(model.getName());
+        team.setLogoUrl(model.getLogoUrl());
         team.setFoundedYear(model.getFoundedYear());
         return repository.save(team);
 
     }
     public Team updateTeam( Integer id,  Team model) {
         Team team = repository.findById(id).orElseThrow();
-        team.setBaseLocation(team.getBaseLocation());
-        team.setTeamChef(team.getTeamChef());
-        team.setChampionships(team.getChampionships());
-        team.setCountry(team.getCountry());
-        team.setCarName(team.getCarName());
-        team.setEngineSupplier(team.getEngineSupplier());
-        team.setName(team.getName());
-        team.setLogoUrl(team.getLogoUrl());
+        team.setBaseLocation(model.getBaseLocation());
+        team.setTeamChef(model.getTeamChef());
+        team.setChampionships(model.getChampionships());
+        team.setCountry(model.getCountry());
+        team.setCarName(model.getCarName());
+        team.setEngineSupplier(model.getEngineSupplier());
+        team.setName(model.getName());
+        team.setLogoUrl(model.getLogoUrl());
         team.setFoundedYear(model.getFoundedYear());
         return repository.save(team);
     }

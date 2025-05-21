@@ -10,7 +10,7 @@ import rs.ac.singidunum.f1_2025.service.TeamService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/team")
+@RequestMapping(path = "/api/teams")
 @CrossOrigin
 @RequiredArgsConstructor
 public class TeamController {

@@ -30,28 +30,28 @@ public class RaceService {
 
     public Race createRace( Race model) {
         Race race = new Race();
-        race.setName(race.getName());
-        race.setLocation(race.getLocation());
-        race.setCountry(race.getCountry());
-        race.setDate(race.getDate());
-        race.setStartTime(race.getStartTime());
-        race.setLapLengthKm(race.getTotalDistanceKm());
-        race.setLapCount(race.getLapCount());
-        race.setTotalDistanceKm(race.getTotalDistanceKm());
-        race.setTrackType(race.getTrackType());
+        race.setName(model.getName());
+        race.setLocation(model.getLocation());
+        race.setCountry(model.getCountry());
+        race.setDate(model.getDate());
+        race.setStartTime(model.getStartTime());
+        race.setLapLengthKm(model.getTotalDistanceKm());
+        race.setLapCount(model.getLapCount());
+        race.setTotalDistanceKm(model.getTotalDistanceKm());
+        race.setTrackType(model.getTrackType());
         return repository.save(race);
     }
     public Race updateRace(Integer id,  Race model) {
         Race race = repository.findById(id).orElseThrow();
-        race.setName(race.getName());
-        race.setLocation(race.getLocation());
-        race.setCountry(race.getCountry());
-        race.setDate(race.getDate());
-        race.setStartTime(race.getStartTime());
-        race.setLapLengthKm(race.getTotalDistanceKm());
-        race.setLapCount(race.getLapCount());
-        race.setTotalDistanceKm(race.getTotalDistanceKm());
-        race.setTrackType(race.getTrackType());
+        race.setName(model.getName());
+        race.setLocation(model.getLocation());
+        race.setCountry(model.getCountry());
+        race.setDate(model.getDate());
+        race.setStartTime(model.getStartTime());
+        race.setLapLengthKm(model.getTotalDistanceKm());
+        race.setLapCount(model.getLapCount());
+        race.setTotalDistanceKm(model.getTotalDistanceKm());
+        race.setTrackType(model.getTrackType());
         return repository.save(race);
     }
     public void  deleteRace( Integer id) {

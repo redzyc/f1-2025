@@ -29,26 +29,26 @@ public class ResultService {
 
     public Result createResult( Result model) {
         Result result = new Result();
-        result.setRaceId(result.getRaceId());
-        result.setPosition(result.getPosition());
-        result.setDriverId(result.getDriverId());
-        result.setStatus(result.getStatus());
-        result.setLapsCompleted(result.getLapsCompleted());
-        result.setPitStops(result.getPitStops());
-        result.setTimeGap(result.getTimeGap());
-        result.setStatus(result.getStatus());
+        result.setRaceId(model.getRaceId());
+        result.setPosition(model.getPosition());
+        result.setDriverId(model.getDriverId());
+        result.setStatus(model.getStatus());
+        result.setLapsCompleted(model.getLapsCompleted());
+        result.setPitStops(model.getPitStops());
+        result.setTimeGap(model.getTimeGap());
+        result.setStatus(model.getStatus());
         return repository.save(result);
     }
     public Result updateResult( Integer id,  Result model) {
         Result result = repository.findById(id).orElseThrow();
-        result.setRaceId(result.getRaceId());
-        result.setPosition(result.getPosition());
-        result.setDriverId(result.getDriverId());
-        result.setStatus(result.getStatus());
-        result.setLapsCompleted(result.getLapsCompleted());
-        result.setPitStops(result.getPitStops());
-        result.setTimeGap(result.getTimeGap());
-        result.setStatus(result.getStatus());
+        result.setRaceId(model.getRaceId());
+        result.setPosition(model.getPosition());
+        result.setDriverId(model.getDriverId());
+        result.setStatus(model.getStatus());
+        result.setLapsCompleted(model.getLapsCompleted());
+        result.setPitStops(model.getPitStops());
+        result.setTimeGap(model.getTimeGap());
+        result.setStatus(model.getStatus());
         return repository.save(result);
     }
     public void  deleteResult( Integer id) {
