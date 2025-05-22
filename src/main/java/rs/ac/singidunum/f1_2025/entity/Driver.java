@@ -43,8 +43,9 @@ public class Driver {
     @Column(nullable = false)
     private String profileImage;
 
-
-    private Integer teamId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
 
     @JsonIgnore
     private LocalDateTime deletedAt;

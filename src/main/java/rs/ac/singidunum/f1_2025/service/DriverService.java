@@ -31,7 +31,7 @@ public class DriverService {
         driver.setLastName(model.getLastName());
         driver.setWorldTitles(model.getWorldTitles());
         driver.setProfileImage(model.getProfileImage());
-        driver.setTeamId(model.getTeamId());
+        driver.setTeam(model.getTeam());
         return repository.save(driver);
     }
     public Driver updateDriver( Integer id,  Driver model) {
@@ -43,7 +43,7 @@ public class DriverService {
         driver.setLastName(model.getLastName());
         driver.setWorldTitles(model.getWorldTitles());
         driver.setProfileImage(model.getProfileImage());
-        driver.setTeamId(model.getTeamId());
+        driver.setTeam(model.getTeam());
         return repository.save(driver);
     }
     public void  deleteDriver(Integer id) {

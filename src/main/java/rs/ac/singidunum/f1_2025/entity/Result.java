@@ -28,9 +28,13 @@ public class Result {
     @Column(name="result_id")
     private Integer id;
 
-    private Integer driverId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "driver_id", nullable = false)
+    private Driver driver;
 
-    private Integer raceId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "race_id", nullable = false)
+    private Race race;
 
     @Column(nullable = false)
     private Integer position;

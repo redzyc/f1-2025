@@ -24,9 +24,9 @@ public class ResultService {
 
     public Result createResult( Result model) {
         Result result = new Result();
-        result.setRaceId(model.getRaceId());
+        result.setRace(model.getRace());
         result.setPosition(model.getPosition());
-        result.setDriverId(model.getDriverId());
+        result.setDriver(model.getDriver());
         result.setStatus(model.getStatus());
         result.setLapsCompleted(model.getLapsCompleted());
         result.setPitStops(model.getPitStops());
@@ -35,9 +35,9 @@ public class ResultService {
     }
     public Result updateResult( Integer id,  Result model) {
         Result result = repository.findById(id).orElseThrow();
-        result.setRaceId(model.getRaceId());
+        result.setRace(model.getRace());
         result.setPosition(model.getPosition());
-        result.setDriverId(model.getDriverId());
+        result.setDriver(model.getDriver());
         result.setStatus(model.getStatus());
         result.setLapsCompleted(model.getLapsCompleted());
         result.setPitStops(model.getPitStops());
