@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raspored trka</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2418/2418779.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  <style>
+  </style>
+</head>
+
+<body data-bs-theme="dark">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">F1 2025</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+        </div>
+      </div>
+    </nav>
+    <h1 class = "h3">Raspored trka</h1>
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">NAZIV</th>
+          <th scope="col">LOKACIJA</th>
+          <th scope="col">DRZAVA</th>
+          <th scope="col">DATUM</th>
+          <th scope="col">DUZINA KRUGA</th>
+          <th scope="col">BROJ KRUGOVA</th>
+          <th scope="col">VRSTA STAZE</th>
+          <th scope="col">VRSTA TRKE</th>
+
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <template id="template">
+    <tr>
+      <td class="id"></td>
+      <td class="name"></td>
+      <td class="location"></td>
+      <td class="country"></td>
+      <td class="race_date"></td>
+      <td class="count_length"></td>
+      <td class="lap_count"></td>
+      <td class="track_type"></td>
+      <td class="race_type"></td>
+
+    </tr>
+
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
