@@ -33,19 +33,19 @@
         </div>
       </div>
     </nav>
-    <h1 class = "h3">Raspored trka</h1>
+    <h1 class="h3">Raspored trka</h1>
     <table class="table table-hover table-striped">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">NAZIV</th>
-          <th scope="col">LOKACIJA</th>
-          <th scope="col">DRZAVA</th>
+          <th scope="col">GLAVNO SEDIŠTE</th>
           <th scope="col">DATUM</th>
           <th scope="col">DUZINA KRUGA</th>
           <th scope="col">BROJ KRUGOVA</th>
           <th scope="col">VRSTA STAZE</th>
           <th scope="col">VRSTA TRKE</th>
+          <th>Detalji</th>
 
         </tr>
       </thead>
@@ -58,20 +58,45 @@
       <td class="id"></td>
       <td class="name"></td>
       <td class="location"></td>
-      <td class="country"></td>
       <td class="race_date"></td>
       <td class="count_length"></td>
       <td class="lap_count"></td>
       <td class="track_type"></td>
       <td class="race_type"></td>
+      <td><a class="details btn btn-sm btn-primary" href="#">Detalji</a></td>
 
     </tr>
 
   </template>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const table = document.querySelector('tbody')
+    const template = document.getElementById('template')
+
+    axios.get('http://localhost:8080/api/teams')
+      .then(rsp => {
+        rsp.data.forEach(team => {
+          const copy = template.content.cloneNode(true);
+
+          copy.querySelector('.id').innerText = team.id;
+          copy.querySelector('.name').innerText = team.name;
+          copy.querySelector('.location').innerText = team.baseLocation;
+          copy.querySelector('.race_date').innerText = team.foundedYear;
+          copy.querySelector('.count_length').innerText = team.carName ;
+          copy.querySelector('.lap_count').innerText = team.championships;
+          copy.querySelector('.track_type').innerText = team.engineSupplier;
+          copy.querySelector('.race_type').innerText = team.teamChef;
+          copy.querySelector('.details').href = `./team.html?l=${team.shortName}`;
+          table.appendChild(copy)
+
+        });
+      })
+  </script>
+
 </body>
 
 </html>
