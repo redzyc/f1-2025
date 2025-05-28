@@ -23,9 +23,6 @@ public class Team {
     private String name;
 
     @Column(nullable = false)
-    private String country;
-
-    @Column(nullable = false)
     private Integer foundedYear;
 
     @Column(nullable = false)
@@ -46,6 +43,9 @@ public class Team {
 
     @Column(nullable = false)
     private String carName;
+
+    @Column(nullable = false)
+    private String shortName;
 
     @JsonIgnore
     private LocalDateTime deletedAt;

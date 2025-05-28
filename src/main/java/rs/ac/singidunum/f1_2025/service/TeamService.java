@@ -28,12 +28,12 @@ public class TeamService {
         team.setBaseLocation(model.getBaseLocation());
         team.setTeamChef(model.getTeamChef());
         team.setChampionships(model.getChampionships());
-        team.setCountry(model.getCountry());
         team.setCarName(model.getCarName());
         team.setEngineSupplier(model.getEngineSupplier());
         team.setName(model.getName());
         team.setLogoUrl(model.getLogoUrl());
         team.setFoundedYear(model.getFoundedYear());
+        team.setShortName(model.getShortName());
         return repository.save(team);
 
     }
@@ -42,11 +42,11 @@ public class TeamService {
         team.setBaseLocation(model.getBaseLocation());
         team.setTeamChef(model.getTeamChef());
         team.setChampionships(model.getChampionships());
-        team.setCountry(model.getCountry());
         team.setCarName(model.getCarName());
         team.setEngineSupplier(model.getEngineSupplier());
         team.setName(model.getName());
         team.setLogoUrl(model.getLogoUrl());
+        team.setShortName(model.getShortName());
         team.setFoundedYear(model.getFoundedYear());
         return repository.save(team);
     }
