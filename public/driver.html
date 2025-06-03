@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Raspored trka</title>
+  <title>Vozaci</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2418/2418779.png" type="image/x-icon" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -24,9 +24,9 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-3 fw-bold">
-          <li class="nav-item"><a class="nav-link active text-white" href="/index.html"><i class="fa-solid fa-film me-1"></i> Raspored trka</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/index.html"><i class="fa-solid fa-film me-1"></i> Raspored trka</a></li>
           <li class="nav-item"><a class="nav-link text-white" href="/list.html"><i class="fa-solid fa-user me-1"></i> Timovi</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/driver.html"><i class="fa-solid fa-calendar-days me-1"></i> Vozači</a></li>
+          <li class="nav-item"><a class="nav-link active text-white" href="/driver.html"><i class="fa-solid fa-calendar-days me-1"></i> Vozači</a></li>
           <li class="nav-item"><a class="nav-link text-white" href="/result.html"><i class="fa-solid fa-ticket me-1"></i> Rezultati</a></li>
         </ul>
       </div>
@@ -34,7 +34,7 @@
   </nav>
 
   <div class="container">
-    <h1 class="display-4 fw-bold mb-4 text-center">Raspored trka F1 2025</h1>
+    <h1 class="display-4 fw-bold mb-4 text-center">Vozači F1 2025</h1>
 
     <div class="card shadow">
       <div class="card-body">
@@ -43,14 +43,14 @@
             <thead class="table-dark">
               <tr>
                 <th>#</th>
-                <th>Naziv</th>
-                <th>Lokacija</th>
+                <th>Slika</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Broj</th>
                 <th>Država</th>
-                <th>Datum trke</th>
-                <th>Dužina kruga (km)</th>
-                <th>Broj krugova</th>
-                <th>Tip staze</th>
-                <th>Tip trke</th>
+                <th>Godina debitovanja</th>
+                <th>Broj titula</th>
+                <th>Tim</th>
                 <th>Detalji</th>
               </tr>
             </thead>
@@ -64,14 +64,14 @@
   <template id="template">
     <tr>
       <td class="id"></td>
-      <td class="name"></td>
-      <td class="location"></td>
-      <td class="country"></td>
-      <td class="raceDate"></td>
-      <td class="lapLengthKm"></td>
-      <td class="lapCount"></td>
-      <td class="trackType"></td>
-      <td class="raceType"></td>
+      <td><img class="profile-image rounded" src="" alt="Profilna slika" width="50" height="50"></td>
+      <td class="firstName"></td>
+      <td class="lastName"></td>
+      <td class="driverNumber"></td>
+      <td class="nationality"></td>
+      <td class="debutYear"></td>
+      <td class="worldTitles"></td>
+      <td class="teamName"></td>
       <td><a class="details btn btn-sm btn-outline-danger fw-semibold" href="#">Detalji</a></td>
     </tr>
   </template>
@@ -82,35 +82,27 @@
     const table = document.querySelector('tbody');
     const template = document.getElementById('template');
 
-    function formatDate(dateString) {
-      const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-      const date = new Date(dateString);
-      return date.toLocaleDateString('sr-RS', options);
-    }
-
-    axios.get('api/races')
+    axios.get('api/drivers')
       .then(response => {
-        response.data.forEach(race => {
-          if (race.deletedAt) return;
+        response.data.forEach(driver => {
+          if (driver.deletedAt) return; 
 
           const copy = template.content.cloneNode(true);
 
-          copy.querySelector('.id').innerText = race.id;
-          copy.querySelector('.name').innerText = race.name;
-          copy.querySelector('.location').innerText = race.location;
-          copy.querySelector('.country').innerText = race.country;
-          copy.querySelector('.raceDate').innerText = formatDate(race.raceDate);
-          copy.querySelector('.lapLengthKm').innerText = race.lapLengthKm;
-          copy.querySelector('.lapCount').innerText = race.lapCount;
-          copy.querySelector('.trackType').innerText = race.trackType;
-          copy.querySelector('.raceType').innerText = race.raceType;
-          copy.querySelector('.details').href = `./race-details.html?id=${race.id}`;
-
+          copy.querySelector('.id').innerText = driver.id;
+          copy.querySelector('.profile-image').src = driver.profileImage;
+          copy.querySelector('.firstName').innerText = driver.firstName;
+          copy.querySelector('.lastName').innerText = driver.lastName;
+          copy.querySelector('.driverNumber').innerText = driver.driverNumber;
+          copy.querySelector('.nationality').innerText = driver.nationality;
+          copy.querySelector('.debutYear').innerText = driver.debutYear;
+          copy.querySelector('.worldTitles').innerText = driver.worldTitles;
+          copy.querySelector('.teamName').innerText = driver.team?.name;
           table.appendChild(copy);
         });
       })
       .catch(err => {
-        console.error('Greška pri učitavanju rasporeda trka:', err);
+        console.error('Greška pri učitavanju vozača:', err);
       });
   </script>
 </body>
