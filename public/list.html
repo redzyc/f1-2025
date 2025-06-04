@@ -3,128 +3,134 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Timovi</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2418/2418779.png" type="image/x-icon" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .team-card {
+      cursor: pointer;
+    }
+
+    .drivers-list {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-top: 0.5rem;
+    }
+
+    .drivers-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .drivers-list .badge {
+      font-size: 1rem;
+      padding: 0.5em 1em;
+    }
+  </style>
 </head>
 
 <body data-bs-theme="dark">
-<nav class="navbar navbar-expand-lg bg-danger navbar-dark mb-4">
-  <div class="container-fluid">
-    <a class="navbar-brand text-white" href="/index.html">
-      <img src="https://media.formula1.com/image/upload/f_auto,c_limit,w_285,q_auto/f_auto/q_auto/fom-website/etc/designs/fom-website/images/F1_75_Logo"
-        alt="Opis slike" width="205" height="24">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-lg bg-danger navbar-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="/index.html">
+        <img
+          src="https://media.formula1.com/image/upload/f_auto,c_limit,w_285,q_auto/f_auto/q_auto/fom-website/etc/designs/fom-website/images/F1_75_Logo"
+          alt="Opis slike" width="205" height="24" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-3 fw-bold">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="/index.html">
-            <i class="fa-solid fa-film me-1"></i> Raspored trka
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="/list.html">
-            <i class="fa-solid fa-user me-1"></i> Timovi
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="/driver.html">
-            <i class="fa-solid fa-calendar-days me-1"></i> Vozaci
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="/result.html">
-            <i class="fa-solid fa-ticket me-1"></i> Rezultati
-          </a>
-        </li>
-      </ul>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-3 fw-bold">
+          <li class="nav-item"><a class="nav-link text-white" href="/index.html"><i class="fa-solid fa-film me-1"></i>
+              Raspored trka</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/list.html"><i class="fa-solid fa-user me-1"></i>
+              Timovi</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/driver.html"><i
+                class="fa-solid fa-calendar-days me-1"></i> Vozači</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/result.html"><i
+                class="fa-solid fa-ticket me-1"></i> Rezultati</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
-
-
-
+  </nav>
 
   <div class="container">
     <h1 class="display-4 fw-bold mb-4 text-center">F1 Timovi 2025</h1>
+    <div id="teamsContainer" class="row g-4 justify-content-center"></div>
+  </div>
 
-    <div class="card shadow">
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-hover table-striped align-middle text-center">
-            <thead class="table-dark">
-              <tr>
-                <th>#</th>
-                <th>NAZIV</th>
-                <th>GLAVNO SEDIŠTE</th>
-                <th>GODINA NASTANKA</th>
-                <th>ŠASIJA</th>
-                <th>BROJ TITULA</th>
-                <th>JEDICINA ZA NAPAJANJE</th>
-                <th>ŠEF TIMA</th>
-                <th>DETALJI</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+  <template id="team-template">
+    <div class="col-md-6">
+      <div class="card text-white bg-dark shadow team-card h-100">
+        <img src="#" class="card-img-top logo_url" alt="Team Logo" />
+        <div class="card-body">
+          <h5 class="card-title name"></h5>
+          <div class="drivers-list"></div>
         </div>
       </div>
     </div>
-  </div>
-
-  <template id="template">
-    <tr>
-      <td class="id"></td>
-      <td class="name"></td>
-      <td class="base_location"></td>
-      <td class="founded_year"></td>
-      <td class="car_name"></td>
-      <td class="championships"></td>
-      <td class="engine_supplier"></td>
-      <td class="team_chef"></td>
-      <td>
-        <a class="details btn btn-sm btn-outline-danger fw-semibold" href="#">Detalji</a>
-      </td>
-    </tr>
   </template>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    const table = document.querySelector('tbody');
-    const template = document.getElementById('template');
-
+    const template = document.getElementById('team-template');
+    const container = document.getElementById('teamsContainer');
     axios.get('api/teams')
       .then(rsp => {
-        rsp.data.forEach(team => {
+        const teams = rsp.data;
+
+        teams.forEach(team => {
           if (!team.shortName) {
             console.warn("Preskačem tim bez shortName:", team);
             return;
           }
-          const copy = template.content.cloneNode(true);
 
-          copy.querySelector('.id').innerText = team.id;
-          copy.querySelector('.name').innerText = team.name;
-          copy.querySelector('.base_location').innerText = team.baseLocation;
-          copy.querySelector('.founded_year').innerText = team.foundedYear;
-          copy.querySelector('.car_name').innerText = team.carName;
-          copy.querySelector('.championships').innerText = team.championships;
-          copy.querySelector('.engine_supplier').innerText = team.engineSupplier;
-          copy.querySelector('.team_chef').innerText = team.teamChef;
-          copy.querySelector('.details').href = `./team.html?l=${team.shortName}&id=${team.id}`;
-          table.appendChild(copy);
+          const copy = template.content.cloneNode(true);
+          const card = copy.querySelector('.team-card');
+
+          card.querySelector('.logo_url').src = team.logoUrl;
+          card.querySelector('.name').innerText = team.name;
+          axios.get('/api/drivers?teamId=' + team.id)
+            .then(driversRsp => {
+              const drivers = driversRsp.data;
+              const driversDiv = card.querySelector('.drivers-list');
+
+              if (drivers.length > 0) {
+                driversDiv.innerHTML = '';
+
+                for (let i = 0; i < drivers.length; i++) {
+                  const driverName = drivers[i].firstName + ' ' + drivers[i].lastName;
+
+                  const span = document.createElement('span');
+                  span.className = 'badge rounded-pill text-bg-light';
+                  span.innerText = driverName;
+
+                  driversDiv.appendChild(span);
+                }
+              } else {
+                driversDiv.innerText = 'Nema podataka o vozačima';
+              }
+            })
+            .catch(err => {
+              console.error('Greška', err);
+            });
+
+          card.addEventListener('click', () => {
+            window.location.href = `./team.html?l=${team.shortName}&id=${team.id}`;
+          });
+
+          container.appendChild(copy);
         });
-      });
+      })
+      .catch(err => console.error("Greška: ", err));
   </script>
 </body>
 

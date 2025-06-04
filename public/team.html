@@ -1,24 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Team Details</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2418/2418779.png" type="image/x-icon" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 </head>
-<body>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+<style>
+  #team_logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-height: 350px;
+    border-radius: 0.5rem 0 0 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: #1a1a1a;
+    display: block;
+    margin: auto;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+</style>
+
+<body data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg bg-danger navbar-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="/index.html">
+        <img
+          src="https://media.formula1.com/image/upload/f_auto,c_limit,w_285,q_auto/f_auto/q_auto/fom-website/etc/designs/fom-website/images/F1_75_Logo"
+          alt="Logo" width="205" height="24" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-3 fw-bold">
+          <li class="nav-item"><a class="nav-link active text-white" href="/index.html">Raspored trka</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/list.html">Timovi</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/driver.html">Vozači</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/result.html">Rezultati</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card mb-4" id="teamCard" hidden>
+      <div class="row g-0 align-items-center">
+        <div class="col-md-5">
+          <img src="#" class="img-fluid" id="team_logo" alt="Team Logo">
+        </div>
+        <div class="col-md-7">
+          <div class="card-body">
+            <h5 class="card-title" id="team_name"></h5>
+            <p class="card-text" id="base_location"></p>
+            <p class="card-text" id="founded_year"></p>
+            <p class="card-text" id="car_name"></p>
+            <p class="card-text" id="championships"></p>
+            <p class="card-text" id="engine_supplier"></p>
+            <p class="card-text" id="team_chef"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+    <h3 class="text-white mb-3">Vozači tima</h3>
+    <div class="row" id="driversList">
+    </div>
+  </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-      const params = new URLSearchParams(location.search);
-      const link = params
-      const id = params.get('id')
-      const team = document.getElementById('team')
-      console.log(team)
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+
+    axios.get('/api/teams/' + id)
+      .then(rsp => {
+        const team = rsp.data;
+        document.getElementById('team_logo').src = team.logoUrl;
+        document.getElementById('team_name').innerText = `Naziv tima: ${team.name}`;
+        document.getElementById('base_location').innerText = `Sedište tima: ${team.baseLocation}`;
+        document.getElementById('founded_year').innerText = `Godina osnovanja: ${team.foundedYear}`;
+        document.getElementById('car_name').innerText = `Šasija: ${team.carName}`;
+        document.getElementById('championships').innerText = `Broj titula: ${team.championships}`;
+        document.getElementById('engine_supplier').innerText = `Jedinica za napajanje: ${team.engineSupplier}`;
+        document.getElementById('team_chef').innerText = `Šef tima: ${team.teamChef}`;
+        document.getElementById('teamCard').hidden = false;
+        document.title = rsp.data.shortName;
+      });
+
+
+    axios.get('/api/drivers?teamId=' + id)
+      .then(rsp => {
+        const drivers = rsp.data;
+        const container = document.getElementById('driversList');
+        drivers.forEach(driver => {
+          const col = document.createElement('div');
+          col.className = 'col-md-4 mb-4';
+          col.innerHTML = `
+            <div class="card h-100 text-white bg-dark position-relative">
+              <div class="position-absolute bottom-0 end-0 p-2">
+                <span class="fs-1 fw-bold text-white">${driver.driverNumber}</span>
+              </div>
+              <img src="${driver.profileImage}" class="card-img-top" alt="${driver.firstName}">
+              <div class="card-body">
+                <h5 class="card-title">${driver.firstName} ${driver.lastName}</h5>
+                <p class="card-text">Nacionalnost: ${driver.nationality}<br>Godina debija: ${driver.debutYear}</p>
+              </div>
+            </div>
+          `;
+
+          container.appendChild(col);
+        });
+      });
+
   </script>
-  
 </body>
+
 </html>
