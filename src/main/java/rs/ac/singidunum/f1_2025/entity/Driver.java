@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
+import java.time.*;
 @Entity
 @Table(name= "driver")
 @NoArgsConstructor
@@ -32,7 +31,7 @@ public class Driver {
     private String nationality;
 
     @Column(nullable = false)
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(nullable = false)
     private Integer debutYear;

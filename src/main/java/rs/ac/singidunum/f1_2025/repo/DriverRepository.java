@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface DriverRepository extends JpaRepository<Driver,Integer> {
     List<Driver> findAllByDeletedAtNull();
     Optional<Driver> findByIdAndDeletedAtIsNull(Integer id);
+    List<Driver> findByTeamId(Integer teamId);
 }

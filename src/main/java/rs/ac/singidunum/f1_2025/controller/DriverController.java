@@ -17,8 +17,8 @@ public class DriverController {
     private final DriverService service;
 
     @GetMapping
-    public List<Driver> getDrivers(){
-        return service.getDrivers();
+    public List<Driver> getAllDrivers(@RequestParam(required = false) Integer teamId){
+        return service.getAllDrivers(teamId);
     }
     @GetMapping(path = "/{id}")
     public ResponseEntity<Driver> getDriverById(@PathVariable Integer id){

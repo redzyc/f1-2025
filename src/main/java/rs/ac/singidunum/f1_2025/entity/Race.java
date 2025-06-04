@@ -8,11 +8,7 @@ import lombok.Setter;
 
 import javax.sound.midi.Track;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-enum RaceType {
-    SPRINT,
-    RACE
-}
+import java.time.*;
 enum TrackType {
     STREET,
     PERMANENT,
@@ -39,7 +35,7 @@ public class Race {
     private String country;
 
     @Column(nullable = false)
-    private LocalDateTime raceDate;
+    private LocalDate raceDate;
 
 
     @Column(nullable = false)
@@ -49,12 +45,11 @@ public class Race {
     private Integer lapCount;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TrackType trackType;
+    private String racePicture;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private RaceType raceType;
+    private TrackType trackType;
 
     @JsonIgnore
     private LocalDateTime deletedAt;

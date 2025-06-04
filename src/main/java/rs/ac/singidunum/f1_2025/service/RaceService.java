@@ -26,6 +26,7 @@ public class RaceService {
     public Race createRace( Race model) {
         Race race = new Race();
         race.setName(model.getName());
+        race.setRacePicture(model.getRacePicture());
         race.setLocation(model.getLocation());
         race.setCountry(model.getCountry());
         race.setRaceDate(model.getRaceDate());
@@ -37,6 +38,7 @@ public class RaceService {
     public Race updateRace(Integer id,  Race model) {
         Race race = repository.findById(id).orElseThrow();
         race.setName(model.getName());
+        race.setRacePicture(model.getRacePicture());
         race.setLocation(model.getLocation());
         race.setCountry(model.getCountry());
         race.setRaceDate(model.getRaceDate());

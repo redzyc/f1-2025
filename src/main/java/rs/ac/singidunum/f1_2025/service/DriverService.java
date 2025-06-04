@@ -21,12 +21,19 @@ public class DriverService {
     public Optional<Driver> getDriverById( Integer id){
         return repository.findByIdAndDeletedAtIsNull(id);
     }
+    public List<Driver> getAllDrivers( Integer teamId) {
+        if (teamId != null) {
+            return repository.findByTeamId(teamId);
+        }
+        return repository.findAll();
+    }
 
     public Driver createDriver( Driver model) {
         Driver driver = new Driver();
         driver.setFirstName(model.getFirstName());
         driver.setDriverNumber(model.getDriverNumber());
         driver.setNationality(model.getNationality());
+        driver.setDateOfBirth(model.getDateOfBirth());
         driver.setDebutYear(model.getDebutYear());
         driver.setLastName(model.getLastName());
         driver.setWorldTitles(model.getWorldTitles());
@@ -38,6 +45,7 @@ public class DriverService {
         Driver driver = repository.findById(id).orElseThrow();
         driver.setFirstName(model.getFirstName());
         driver.setDriverNumber(model.getDriverNumber());
+        driver.setDateOfBirth(model.getDateOfBirth());
         driver.setNationality(model.getNationality());
         driver.setDebutYear(model.getDebutYear());
         driver.setLastName(model.getLastName());
