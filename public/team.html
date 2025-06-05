@@ -6,8 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Team Details</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2418/2418779.png" type="image/x-icon" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
   #team_logo {
@@ -36,7 +39,7 @@
       <a class="navbar-brand text-white" href="/index.html">
         <img
           src="https://media.formula1.com/image/upload/f_auto,c_limit,w_285,q_auto/f_auto/q_auto/fom-website/etc/designs/fom-website/images/F1_75_Logo"
-          alt="Logo" width="205" height="24" />
+          alt="Opis slike" width="205" height="24" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,10 +48,15 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-3 fw-bold">
-          <li class="nav-item"><a class="nav-link active text-white" href="/index.html">Raspored trka</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/list.html">Timovi</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/driver.html">Vozači</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/result.html">Rezultati</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/index.html"><i class="fa-solid fa-film me-1"></i>
+              Raspored trka</a></li>
+          <li class="nav-item"><a class="nav-link active text-white" href="/list.html"><i
+                class="fa-solid fa-user me-1"></i>
+              Timovi</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/driver.html"><i class="fa-solid fa-user me-1"></i>
+              Vozači</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/result.html"><i
+                class="fa-solid fa-ticket me-1"></i> Rezultati</a></li>
         </ul>
       </div>
     </div>
@@ -70,10 +78,24 @@
             <p class="card-text" id="engine_supplier"></p>
             <p class="card-text" id="team_chef"></p>
           </div>
+          <div class="d-flex justify-content-end mt-3 mb-3 me-3">
+            <a href="#" class="btn btn-sm btn-success me-2 edit" title="Izmeni">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+            <button type="button" class="btn btn-sm btn-danger remove" title="Obriši">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
+
   </div>
+
+  </div>
+
+
 
 
   <div>
@@ -103,6 +125,14 @@
         document.getElementById('engine_supplier').innerText = `Jedinica za napajanje: ${team.engineSupplier}`;
         document.getElementById('team_chef').innerText = `Šef tima: ${team.teamChef}`;
         document.getElementById('teamCard').hidden = false;
+        document.querySelector('.edit').href = '/edit/team.html?Id=' + team.id;
+        document.querySelector('.remove').addEventListener('click', () => {
+                        if (!confirm(`Da li sigurno želite da obrišete ${team.name}?`)) return
+                        axios.request({
+                            url: `/api/teams/${team.id}`,
+                            method: 'delete'
+                        }).then(rsp => window.location.reload())
+                    })
         document.title = rsp.data.shortName;
       });
 
