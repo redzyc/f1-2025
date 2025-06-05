@@ -26,6 +26,7 @@ public class ResultService {
         Result result = new Result();
         result.setRace(model.getRace());
         result.setPosition(model.getPosition());
+        result.setStartingPosition(model.getStartingPosition());
         result.setDriver(model.getDriver());
         result.setStatus(model.getStatus());
         result.setLapsCompleted(model.getLapsCompleted());
@@ -37,6 +38,7 @@ public class ResultService {
         Result result = repository.findById(id).orElseThrow();
         result.setRace(model.getRace());
         result.setPosition(model.getPosition());
+        result.setStartingPosition(model.getStartingPosition());
         result.setDriver(model.getDriver());
         result.setStatus(model.getStatus());
         result.setLapsCompleted(model.getLapsCompleted());

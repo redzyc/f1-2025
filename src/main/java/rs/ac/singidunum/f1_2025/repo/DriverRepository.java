@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface DriverRepository extends JpaRepository<Driver,Integer> {
+public interface DriverRepository extends JpaRepository<Driver, Integer> {
     List<Driver> findAllByDeletedAtNull();
     Optional<Driver> findByIdAndDeletedAtIsNull(Integer id);
-    List<Driver> findByTeamId(Integer teamId);
+    List<Driver> findByTeamIdAndDeletedAtIsNull(Integer teamId);
+
 }

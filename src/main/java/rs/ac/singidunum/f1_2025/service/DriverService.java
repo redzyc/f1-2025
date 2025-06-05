@@ -21,12 +21,13 @@ public class DriverService {
     public Optional<Driver> getDriverById( Integer id){
         return repository.findByIdAndDeletedAtIsNull(id);
     }
-    public List<Driver> getAllDrivers( Integer teamId) {
+    public List<Driver> getAllActiveDrivers(Integer teamId) {
         if (teamId != null) {
-            return repository.findByTeamId(teamId);
+            return repository.findByTeamIdAndDeletedAtIsNull(teamId);
         }
-        return repository.findAll();
+        return repository.findAllByDeletedAtNull();
     }
+
 
     public Driver createDriver( Driver model) {
         Driver driver = new Driver();
