@@ -125,7 +125,7 @@
         document.getElementById('engine_supplier').innerText = `Jedinica za napajanje: ${team.engineSupplier}`;
         document.getElementById('team_chef').innerText = `Šef tima: ${team.teamChef}`;
         document.getElementById('teamCard').hidden = false;
-        document.querySelector('.edit').href = '/edit/team.html?Id=' + team.id;
+        document.querySelector('.edit').href = '/edit/team.html?id=' + team.id;
         document.querySelector('.remove').addEventListener('click', () => {
                         if (!confirm(`Da li sigurno želite da obrišete ${team.name}?`)) return
                         axios.request({

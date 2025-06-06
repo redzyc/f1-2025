@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Izmena tima</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2418/2418779.png" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .team-card {
+      background-color: #212529;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .team-card:hover {
+      background-color: #343a40;
+    }
+
+
+    .drivers-list {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-top: 0.5rem;
+    }
+
+    .drivers-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .drivers-list .badge {
+      font-size: 1rem;
+      padding: 0.5em 1em;
+    }
+  </style>
+</head>
+
+<body data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg bg-danger navbar-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="/index.html">
+        <img
+          src="https://media.formula1.com/image/upload/f_auto,c_limit,w_285,q_auto/f_auto/q_auto/fom-website/etc/designs/fom-website/images/F1_75_Logo"
+          alt="Opis slike" width="205" height="24" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-3 fw-bold">
+          <li class="nav-item"><a class="nav-link text-white" href="/index.html"><i class="fa-solid fa-film me-1"></i>
+              Raspored trka</a></li>
+          <li class="nav-item"><a class="nav-link active text-white" href="/list.html"><i
+                class="fa-solid fa-user me-1"></i>
+              Timovi</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/driver.html"><i class="fa-solid fa-user me-1"></i>
+              Vozači</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/result.html"><i
+                class="fa-solid fa-ticket me-1"></i> Rezultati</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mb-3 container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/index.html">Home</a></li>
+      <li class="breadcrumb-item"><a href="/list.html">Timovi</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Izmeni Tim</li>
+    </ol>
+  </nav>
+
+  <h3>Izmeni Tim</h3>
+  <form id="edit">
+    <div class="mb-3">
+      <label for="id" class="form-label">ID:</label>
+      <input type="number" class="form-control" id="id" disabled>
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Naziv tima:</label>
+      <input type="text" class="form-control" id="name">
+    </div>
+    <div class="mb-3">
+      <label for="shortName" class="form-label">Kratko ime:</label>
+      <input type="text" class="form-control" id="shortName">
+    </div>
+    <div class="mb-3">
+      <label for="foundedYear" class="form-label">Godina osnivanja:</label>
+      <input type="number" class="form-control" id="foundedYear">
+    </div>
+    <div class="mb-3">
+      <label for="teamChef" class="form-label">Šef tima:</label>
+      <input type="text" class="form-control" id="teamChef">
+    </div>
+    <div class="mb-3">
+      <label for="championships" class="form-label">Broj titula:</label>
+      <input type="number" class="form-control" id="championships">
+    </div>
+    <div class="mb-3">
+      <label for="baseLocation" class="form-label">Lokacija baze:</label>
+      <input type="text" class="form-control" id="baseLocation">
+    </div>
+    <div class="mb-3">
+      <label for="engineSupplier" class="form-label">Dobavljač motora:</label>
+      <input type="text" class="form-control" id="engineSupplier">
+    </div>
+    <div class="mb-3">
+      <label for="carName" class="form-label">Naziv bolida:</label>
+      <input type="text" class="form-control" id="carName">
+    </div>
+    <div class="mb-3">
+      <label for="logoUrl" class="form-label">URL logotipa:</label>
+      <input type="text" class="form-control" id="logoUrl">
+    </div>
+    <button type="submit" class="btn btn-success">
+      <i class="fa-solid fa-floppy-disk"></i> Sačuvaj
+    </button>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id');
+
+  if (!id || id === '') {
+    window.location.href = '/list.html';
+  } else {
+    axios.get('/api/teams/' + id)
+      .then(response => {
+        const data = response.data;
+
+        document.getElementById('id').value = data.id;
+        document.getElementById('name').value = data.name;
+        document.getElementById('shortName').value = data.shortName;
+        document.getElementById('foundedYear').value = data.foundedYear;
+        document.getElementById('teamChef').value = data.teamChef;
+        document.getElementById('championships').value = data.championships;
+        document.getElementById('baseLocation').value = data.baseLocation;
+        document.getElementById('engineSupplier').value = data.engineSupplier;
+        document.getElementById('carName').value = data.carName;
+        document.getElementById('logoUrl').value = data.logoUrl;
+
+        document.getElementById('edit').addEventListener('submit', e => {
+          e.preventDefault();
+
+          axios.put(`/api/teams/${id}`, {
+            name: document.getElementById('name').value,
+            shortName: document.getElementById('shortName').value,
+            foundedYear: Number(document.getElementById('foundedYear').value),
+            teamChef: document.getElementById('teamChef').value,
+            championships: Number(document.getElementById('championships').value),
+            baseLocation: document.getElementById('baseLocation').value,
+            engineSupplier: document.getElementById('engineSupplier').value,
+            carName: document.getElementById('carName').value,
+            logoUrl: document.getElementById('logoUrl').value
+          }).then(() => {
+            window.location.href = '/list.html';
+          }).catch(err => {
+            alert('Greška pri čuvanju tima.');
+            console.error(err);
+          });
+        });
+      })
+      .catch(err => {
+        alert('Greška prilikom učitavanja tima!');
+        console.error(err);
+        window.location.href = '/list.html';
+      });
+  }
+</script>
+
+</script>
+</body>
+
+</html>

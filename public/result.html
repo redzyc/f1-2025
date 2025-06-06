@@ -43,6 +43,7 @@
 
   <div class="container">
     <h1 class="display-4 fw-bold mb-4 text-center">Rezultati trka F1 2025</h1>
+    <a href="/new/team.html" class="btn btn-primary mb-3">+ Dodaj Tim</a>
 
     <div class="card shadow">
       <div class="card-body">
@@ -113,7 +114,7 @@
           copy.querySelector('.lapsCompleted').innerText = result.lapsCompleted;
           copy.querySelector('.pitStops').innerText = result.pitStops;
           copy.querySelector('.status').innerText = result.status;
-          copy.querySelector('.edit').href = '/edit/result.html?Id=' + result.id;
+          copy.querySelector('.edit').href = '/edit/result.html?id=' + result.id;
           copy.querySelector('.remove').addEventListener('click', () => {
             if (!confirm(`Da li sigurno želite da obrišete rezultat ${result.id}?`)) return
             axios.request({
