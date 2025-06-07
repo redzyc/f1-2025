@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Izmena rezultata</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2418/2418779.png" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg bg-danger navbar-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="/index.html">
+        <img
+          src="https://media.formula1.com/image/upload/f_auto,c_limit,w_285,q_auto/f_auto/q_auto/fom-website/etc/designs/fom-website/images/F1_75_Logo"
+          alt="Logo" width="205" height="24" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-3 fw-bold">
+          <li class="nav-item"><a class="nav-link text-white" href="/index.html"><i
+                class="fa-solid fa-flag-checkered me-1"></i> Raspored trka</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/list.html"><i class="fa-solid fa-users me-1"></i>
+              Timovi</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/driver.html"><i class="fa-solid fa-user me-1"></i>
+              Vozači</a></li>
+          <li class="nav-item"><a class="nav-link active text-white" href="/result.html"><i
+                class="fa-solid fa-list-ol me-1"></i> Rezultati</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="/result.html">Rezultati</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Izmeni Rezultat</li>
+      </ol>
+    </nav>
+
+    <h3>Izmeni Rezultat</h3>
+    <form id="edit">
+      <div class="mb-3">
+        <label for="id" class="form-label">ID:</label>
+        <input type="number" class="form-control" id="id" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="driver" class="form-label">Vozač:</label>
+        <select class="form-select" id="driver"></select>
+      </div>
+      <div class="mb-3">
+        <label for="race" class="form-label">Trka:</label>
+        <select class="form-select" id="race"></select>
+      </div>
+      <div class="mb-3">
+        <label for="position" class="form-label">Pozicija:</label>
+        <input type="number" class="form-control" id="position">
+      </div>
+      <div class="mb-3">
+        <label for="startingPosition" class="form-label">Startna pozicija:</label>
+        <input type="number" class="form-control" id="startingPosition">
+      </div>
+      <div class="mb-3">
+        <label for="lapsCompleted" class="form-label">Završeni krugovi:</label>
+        <input type="number" class="form-control" id="lapsCompleted">
+      </div>
+      <div class="mb-3">
+        <label for="pitStops" class="form-label">Pit Stopova:</label>
+        <input type="number" class="form-control" id="pitStops">
+      </div>
+      <div class="mb-3">
+        <label for="status" class="form-label">Status:</label>
+        <select class="form-control" id="status">
+          <option value="FINISHED">FINISHED</option>
+          <option value="DNF">DNF</option>
+          <option value="DSQ">DSQ</option>
+          <option value="DNS">DNS</option>
+          <option value="NC">NC</option>
+          <option value="RETIRED">RETIRED</option>
+          <option value="LAP_DOWN">LAP_DOWN</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success">
+        <i class="fa-solid fa-floppy-disk"></i> Sačuvaj
+      </button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+
+    if (!id || id === '') {
+      window.location.href = '/result.html';
+    } else {
+      axios.get('/api/results/' + id).then(rsp => {
+        const result = rsp.data;
+        document.getElementById('id').value = result.id;
+        document.getElementById('position').value = result.position;
+        document.getElementById('startingPosition').value = result.startingPosition;
+        document.getElementById('lapsCompleted').value = result.lapsCompleted;
+        document.getElementById('pitStops').value = result.pitStops;
+        document.getElementById('status').value = result.status;
+
+        axios.get('/api/drivers').then(rsp => {
+          const driverSelect = document.getElementById('driver');
+          rsp.data.forEach(driver => {
+            const option = document.createElement('option');
+            option.value = driver.id;
+            option.text = `${driver.firstName} ${driver.lastName}`;
+            driverSelect.appendChild(option);
+          });
+          driverSelect.value = result.driver.id;
+        });
+
+        axios.get('/api/races').then(rsp => {
+          const raceSelect = document.getElementById('race');
+          rsp.data.forEach(race => {
+            const option = document.createElement('option');
+            option.value = race.id;
+            option.text = `${race.name} (${race.country})`;
+            raceSelect.appendChild(option);
+          });
+          raceSelect.value = result.race.id;
+        });
+
+        document.getElementById('edit').addEventListener('submit', function (e) {
+          e.preventDefault();
+          const position = Number(document.getElementById('position').value);
+          const startingPosition = Number(document.getElementById('startingPosition').value);
+          const lapsCompleted = Number(document.getElementById('lapsCompleted').value);
+          const pitStops = Number(document.getElementById('pitStops').value);
+
+          if (position < 1) {
+            alert('Pozicija ne može biti manja od 1.');
+            return;
+          }
+          if (startingPosition < 1) {
+            alert('Startna pozicija ne može biti manja od 1.');
+            return;
+          }
+          if (lapsCompleted < 0) {
+            alert('Završeni krugovi ne mogu biti manji od 0.');
+            return;
+          }
+          if (pitStops < 0) {
+            alert('Pit Stopovi ne mogu biti manji od 0.');
+            return;
+          }
+
+
+          axios.request({
+            url: `/api/results/${result.id}`,
+            method: 'put',
+            data: {
+              id: result.id,
+              driver: { id: Number(document.getElementById('driver').value) },
+              race: { id: Number(document.getElementById('race').value) },
+              position: Number(document.getElementById('position').value),
+              startingPosition: Number(document.getElementById('startingPosition').value),
+              lapsCompleted: Number(document.getElementById('lapsCompleted').value),
+              pitStops: Number(document.getElementById('pitStops').value),
+              status: document.getElementById('status').value
+            }
+          }).then(() => {
+            window.location.href = '/result.html';
+          }).catch(err => {
+            alert('Greška pri čuvanju rezultata.');
+            console.error(err);
+          });
+        });
+      }).catch(() => {
+        alert('Rezultat nije pronađen.');
+        window.location.href = '/result.html';
+      });
+    }
+  </script>
+</body>
+
+</html>

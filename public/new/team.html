@@ -50,24 +50,22 @@
       <a class="navbar-brand text-white" href="/index.html">
         <img
           src="https://media.formula1.com/image/upload/f_auto,c_limit,w_285,q_auto/f_auto/q_auto/fom-website/etc/designs/fom-website/images/F1_75_Logo"
-          alt="Opis slike" width="205" height="24" />
+          alt="Logo" width="205" height="24" />
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-3 fw-bold">
-          <li class="nav-item"><a class="nav-link text-white" href="/index.html"><i class="fa-solid fa-film me-1"></i>
-              Raspored trka</a></li>
-          <li class="nav-item"><a class="nav-link active text-white" href="/list.html"><i
-                class="fa-solid fa-user me-1"></i>
+          <li class="nav-item"><a class="nav-link text-white" href="/index.html"><i
+                class="fa-solid fa-flag-checkered me-1"></i> Raspored trka</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/list.html"><i class="fa-solid fa-users me-1"></i>
               Timovi</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/driver.html"><i class="fa-solid fa-user me-1"></i>
-              Vozači</a></li>
+          <li class="nav-item"><a class="nav-link active text-white" href="/driver.html"><i
+                class="fa-solid fa-user me-1"></i> Vozači</a></li>
           <li class="nav-item"><a class="nav-link text-white" href="/result.html"><i
-                class="fa-solid fa-ticket me-1"></i> Rezultati</a></li>
+                class="fa-solid fa-list-ol me-1"></i> Rezultati</a></li>
         </ul>
       </div>
     </div>
@@ -83,7 +81,7 @@
     </nav>
 
     <h3>Dodaj Tim</h3>
-    <form id="edit">
+    <form id="create">
       <div class="mb-3">
         <label for="name" class="form-label">Naziv tima:</label>
         <input type="text" class="form-control" id="name">
@@ -130,8 +128,21 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <script>
-    document.getElementById('edit').addEventListener('submit', (e) => {
+    document.getElementById('create').addEventListener('submit', (e) => {
       e.preventDefault()
+      const foundedYear = Number(document.getElementById('foundedYear').value);
+      const championships = Number(document.getElementById('championships').value);
+
+      if (foundedYear < 1950) {
+        alert("Godina osnivanja ne može biti manja od 1950.");
+        return;
+      }
+
+      if (championships < 0) {
+        alert("Broj titula ne može biti negativan.");
+        return;
+      }
+
       axios.request({
         url: `/api/teams`,
         method: 'post',

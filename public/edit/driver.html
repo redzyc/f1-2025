@@ -16,23 +16,26 @@
       <a class="navbar-brand text-white" href="/index.html">
         <img
           src="https://media.formula1.com/image/upload/f_auto,c_limit,w_285,q_auto/f_auto/q_auto/fom-website/etc/designs/fom-website/images/F1_75_Logo"
-          alt="F1 Logo" width="205" height="24" />
+          alt="Logo" width="205" height="24" />
       </a>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-3 fw-bold">
-          <li class="nav-item"><a class="nav-link text-white" href="/index.html"><i class="fa-solid fa-film me-1"></i>
-              Raspored trka</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/list.html"><i class="fa-solid fa-user me-1"></i>
+          <li class="nav-item"><a class="nav-link text-white" href="/index.html"><i
+                class="fa-solid fa-flag-checkered me-1"></i> Raspored trka</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/list.html"><i class="fa-solid fa-users me-1"></i>
               Timovi</a></li>
           <li class="nav-item"><a class="nav-link active text-white" href="/driver.html"><i
                 class="fa-solid fa-user me-1"></i> Vozači</a></li>
           <li class="nav-item"><a class="nav-link text-white" href="/result.html"><i
-                class="fa-solid fa-ticket me-1"></i> Rezultati</a></li>
+                class="fa-solid fa-list-ol me-1"></i> Rezultati</a></li>
         </ul>
       </div>
     </div>
   </nav>
-
   <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -43,34 +46,47 @@
     </nav>
 
     <h3>Izmeni Vozača</h3>
-    <form id="editDriver">
+    <form id="edit">
       <div class="mb-3">
         <label for="id" class="form-label">ID:</label>
         <input type="number" class="form-control" id="id" disabled>
       </div>
       <div class="mb-3">
         <label for="firstName" class="form-label">Ime:</label>
-        <input type="text" class="form-control" id="firstName">
+        <input type="text" class="form-control" id="firstName" required>
       </div>
       <div class="mb-3">
         <label for="lastName" class="form-label">Prezime:</label>
-        <input type="text" class="form-control" id="lastName">
+        <input type="text" class="form-control" id="lastName" required>
       </div>
       <div class="mb-3">
-        <label for="driverNumber" class="form-label">Broj:</label>
-        <input type="text" class="form-control" id="driverNumber">
+        <label for="driverNumber" class="form-label">Broj vozača:</label>
+        <input type="number" class="form-control" id="driverNumber" required min="1" step="1">
       </div>
       <div class="mb-3">
-        <label for="nationality" class="form-label">Država:</label>
-        <input type="text" class="form-control" id="nationality">
+        <label for="nationality" class="form-label">Nacionalnost:</label>
+        <input type="text" class="form-control" id="nationality" required>
       </div>
       <div class="mb-3">
         <label for="dateOfBirth" class="form-label">Datum rođenja:</label>
-        <input type="date" class="form-control" id="dateOfBirth">
+        <input type="date" class="form-control" id="dateOfBirth" required>
       </div>
       <div class="mb-3">
+        <label for="debutYear" class="form-label">Godina debija:</label>
+        <input type="number" class="form-control" id="debutYear" required min="1975" step="1">
+      </div>
+      <div class="mb-3">
+        <label for="worldTitles" class="form-label">Broj titula:</label>
+        <input type="number" class="form-control" id="worldTitles" required min="0" step="1" value="0">
+      </div>
+      <div class="mb-3">
+        <label for="profileImage" class="form-label">URL slike profila:</label>
+        <input type="text" class="form-control" id="profileImage" required>
+      </div>
+      
+      <div class="mb-3">
         <label for="team" class="form-label">Tim:</label>
-        <select class="form-select" id="team"></select>
+        <select class="form-select" id="team" required></select>
       </div>
 
       <div class="mb-3">
@@ -87,60 +103,97 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
- <script>
-  const params = new URLSearchParams(location.search);
-  const id = params.get('id');
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
 
-  if (!id || id === '') {
-    window.location.href = '/driver.html';
-  } else {
-    axios.get('/api/drivers/' + id).then(res => {
-      const driver = res.data;
+    if (!id || id === '') {
+      window.location.href = '/driver.html';
+    } else {
+      axios.get('/api/drivers/' + id).then(rsp => {
+        const driver = rsp.data;
 
-      document.getElementById('id').value = driver.id;
-      document.getElementById('firstName').value = driver.firstName;
-      document.getElementById('lastName').value = driver.lastName;
-      document.getElementById('driverNumber').value = driver.driverNumber;
-      document.getElementById('nationality').value = driver.nationality;
-      document.getElementById('dateOfBirth').value = driver.dateOfBirth;
-      document.getElementById('profileImage').value = driver.profileImage;
+        document.getElementById('id').value = driver.id;
+        document.getElementById('firstName').value = driver.firstName;
+        document.getElementById('lastName').value = driver.lastName;
+        document.getElementById('driverNumber').value = driver.driverNumber;
+        document.getElementById('debutYear').value = driver.debutYear;
+        document.getElementById('nationality').value = driver.nationality;
+        document.getElementById('dateOfBirth').value = driver.dateOfBirth;
+        document.getElementById('profileImage').value = driver.profileImage;
+        document.getElementById('worldTitles').value = driver.worldTitles || 0;
 
-      const teamSelect = document.getElementById('team');
-      const selectedTeamId = String(driver.teamId);
+        const teamSelect = document.getElementById('team');
+        teamSelect.innerHTML = '';
 
-      axios.get('/api/teams').then(teamRes => {
-        teamRes.data.forEach(team => {
-          const opt = document.createElement('option');
-          opt.value = String(team.id);
-          opt.textContent = team.name;
-          teamSelect.appendChild(opt);
+        axios.get('/api/teams')
+          .then(rsp => {
+            rsp.data.forEach(team => {
+              const option = document.createElement('option');
+              option.value = team.id;
+              option.innerText = team.name;
+              teamSelect.appendChild(option);
+            });
+            if (driver.team && driver.team.id) {
+              teamSelect.value = driver.team.id;
+            }
+          }).catch(err => {
+            alert("Greška prilikom učitavanja timova.");
+            console.error(err);
+          });
+
+        document.getElementById("edit").addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const selectedTeamId = Number(teamSelect.value);
+          if (selectedTeamId === 0) {
+            alert("Molimo odaberite tim.");
+            return;
+          }
+          if (driverNumber < 1) {
+            alert("Broj vozača mora biti pozitivan.");
+            return;
+          }
+
+          if (debutYear < 1975) {
+            alert("Godina debija ne može biti manja od 1975.");
+            return;
+          }
+
+          if (worldTitles < 0) {
+            alert("Broj titula ne može biti negativan.");
+            return;
+          }
+
+          axios.request({
+            url: `/api/drivers/${driver.id}`,
+            method: 'put',
+            data: {
+              id: driver.id,
+              firstName: document.getElementById('firstName').value,
+              lastName: document.getElementById('lastName').value,
+              driverNumber: Number(document.getElementById('driverNumber').value),
+              nationality: document.getElementById('nationality').value,
+              dateOfBirth: document.getElementById('dateOfBirth').value,
+              debutYear: Number(document.getElementById('debutYear').value),
+              worldTitles: Number(document.getElementById('worldTitles').value),
+              profileImage: document.getElementById('profileImage').value,
+              team: {
+                id: selectedTeamId
+              }
+            }
+          }).then(() => {
+            window.location.href = '/driver.html';
+          }).catch(err => {
+            alert("Greška pri čuvanju vozača.");
+            console.error(err);
+          });
         });
-
-        teamSelect.value = selectedTeamId;
       });
+    }
+  </script>
 
 
-      document.getElementById("editDriver").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        axios.put(`/api/drivers/${driver.id}`, {
-          firstName: document.getElementById("firstName").value,
-          lastName: document.getElementById("lastName").value,
-          nationality: document.getElementById("nationality").value,
-          driverNumber: Number(document.getElementById("driverNumber").value),
-          dateOfBirth: document.getElementById("dateOfBirth").value,
-          profileImage: document.getElementById("profileImage").value,
-          teamId: Number(document.getElementById("team").value)
-        }).then(() => {
-          window.location.href = '/driver.html';
-        }).catch(err => {
-          alert("Greška pri čuvanju vozača.");
-          console.error(err);
-        });
-      });
-    });
-  }
-</script>
 
 
 
