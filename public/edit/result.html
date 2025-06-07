@@ -62,19 +62,19 @@
       </div>
       <div class="mb-3">
         <label for="position" class="form-label">Pozicija:</label>
-        <input type="number" class="form-control" id="position" required min="1">
+        <input type="number" class="form-control" id="position" required >
       </div>
       <div class="mb-3">
         <label for="startingPosition" class="form-label">Startna pozicija:</label>
-        <input type="number" class="form-control" id="startingPosition" required min="1" step="1">
+        <input type="number" class="form-control" id="startingPosition" required  step="1">
       </div>
       <div class="mb-3">
         <label for="lapsCompleted" class="form-label">Završeni krugovi:</label>
-        <input type="number" class="form-control" id="lapsCompleted" required min="0" max="99">
+        <input type="number" class="form-control" id="lapsCompleted" required >
       </div>
       <div class="mb-3">
         <label for="pitStops" class="form-label">Broj Pit Stopova:</label>
-        <input type="number" class="form-control" id="pitStops" required min="1"  step="1" max="9">
+        <input type="number" class="form-control" id="pitStops" required   step="1" >
       </div>
       <div class="mb-3">
         <label for="status" class="form-label">Status:</label>
@@ -147,16 +147,32 @@
             alert('Pozicija ne može biti manja od 1.');
             return;
           }
+          if (position > 20) {
+            alert('Pozicija ne može biti veca od 20.');
+            return;
+          }
           if (startingPosition < 1) {
             alert('Startna pozicija ne može biti manja od 1.');
             return;
           }
-          if (lapsCompleted < 0) {
-            alert('Završeni krugovi ne mogu biti manji od 0.');
+          if (startingPosition > 20) {
+            alert('Startna pozicija ne može biti veća od 20.');
             return;
           }
-          if (pitStops < 0) {
-            alert('Pit Stopovi ne mogu biti manji od 0.');
+          if (lapsCompleted < 0) {
+            alert('Broj završenih krugova ne može biti manji od 0.');
+            return;
+          }
+          if (lapsCompleted > 99) {
+            alert('Broj završenih krugova ne može biti veći od 99.');
+            return;
+          }
+          if (pitStops < 1) {
+            alert('Broj pit stopova ne može biti manji od 1.');
+            return;
+          }
+          if (pitStops > 9) {
+            alert('Broj pit stopova ne može biti veći od 9.');
             return;
           }
 

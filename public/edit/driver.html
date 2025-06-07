@@ -61,7 +61,7 @@
       </div>
       <div class="mb-3">
         <label for="driverNumber" class="form-label">Broj vozača:</label>
-        <input type="number" class="form-control" id="driverNumber" required min="1" step="1" max="99">
+        <input type="number" class="form-control" id="driverNumber" required step="1">
       </div>
       <div class="mb-3">
         <label for="nationality" class="form-label">Nacionalnost:</label>
@@ -69,15 +69,15 @@
       </div>
       <div class="mb-3">
         <label for="dateOfBirth" class="form-label">Datum rođenja:</label>
-        <input type="date" class="form-control" id="dateOfBirth" min ="1970-01-01" max = "2008-01-01" required>
+        <input type="date" class="form-control" id="dateOfBirth" required>
       </div>
       <div class="mb-3">
         <label for="debutYear" class="form-label">Godina debija:</label>
-        <input type="number" class="form-control" id="debutYear" required min="1975" step="1" max="2025">
+        <input type="number" class="form-control" id="debutYear" required step="1">
       </div>
       <div class="mb-3">
         <label for="worldTitles" class="form-label">Broj titula:</label>
-        <input type="number" class="form-control" id="worldTitles" required min="0" step="1" value="0">
+        <input type="number" class="form-control" id="worldTitles" required step="1" value="0">
       </div>
       <div class="mb-3">
         <label for="profileImage" class="form-label">URL slike profila:</label>
@@ -86,7 +86,7 @@
 
       <div class="mb-3">
         <label for="team" class="form-label">Tim:</label>
-        <select class="form-select" id="team" required></select>
+        <select class="form-select" id="team"></select>
       </div>
       <button type="submit" class="btn btn-success">
         <i class="fa-solid fa-floppy-disk"></i> Sačuvaj
@@ -145,6 +145,8 @@
           const worldTitles = Number(document.getElementById('worldTitles').value);
           const teamId = Number(teamSelect.value);
           const dateOfBirth = document.getElementById('dateOfBirth').value;
+          const dobYear = new Date(dateOfBirth).getFullYear();
+          const currentYear = new Date().getFullYear();
 
           if (teamId === 0) {
             alert("Molimo odaberite tim.");
@@ -154,8 +156,16 @@
             alert("Broj vozača ne može biti manji od 1.");
             return;
           }
+          if (driverNumber > 99) {
+            alert("Broj vozača ne može biti veći od 99.");
+            return;
+          }
           if (debutYear < 1975) {
             alert("Godina debija ne može biti manja od 1975.");
+            return;
+          }
+          if (debutYear > currentYear) {
+            alert("Godina debija ne može biti veća od sadašnje godine.");
             return;
           }
           if (worldTitles < 0) {
@@ -166,6 +176,15 @@
             alert("Datum rođenja ne može biti pre 1970. godine.");
             return;
           }
+          if ((currentYear - dobYear) < 16) {
+            alert("Vozač mora imati više od 16 godina.");
+            return;
+          }
+          if (debutYear < dobYear + 16) {
+            alert("Vozač mora imati najmanje 16 godina kada je debitovao.");
+            return;
+          }
+
 
           axios.request({
             url: `/api/drivers/${driver.id}`,
@@ -181,7 +200,7 @@
               worldTitles: Number(document.getElementById('worldTitles').value),
               profileImage: document.getElementById('profileImage').value,
               team: {
-                id: selectedTeamId
+                id: teamId
               }
             }
           }).then(() => {

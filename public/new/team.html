@@ -92,7 +92,7 @@
       </div>
       <div class="mb-3">
         <label for="foundedYear" class="form-label">Godina osnivanja:</label>
-        <input type="number" class="form-control" id="foundedYear" min="1950" max="2025" value="2000" required>
+        <input type="number" class="form-control" id="foundedYear"  value="2000" required>
       </div>
       <div class="mb-3">
         <label for="teamChef" class="form-label">Šef tima:</label>
@@ -100,7 +100,7 @@
       </div>
       <div class="mb-3">
         <label for="championships" class="form-label">Broj titula:</label>
-        <input type="number" class="form-control" id="championships" min="0" value="0" required>
+        <input type="number" class="form-control" id="championships" value="0" required>
       </div>
       <div class="mb-3">
         <label for="baseLocation" class="form-label">Lokacija baze:</label>
@@ -132,14 +132,23 @@
       e.preventDefault()
       const foundedYear = Number(document.getElementById('foundedYear').value);
       const championships = Number(document.getElementById('championships').value);
+      const currentYear = new Date().getFullYear();
 
       if (foundedYear < 1950) {
-        alert("Godina osnivanja ne može biti manja od 1950.");
+        alert('Godina osnivanja ne može biti manja od 1950.');
+        return;
+      }
+      if (foundedYear > 2025) {
+        alert('Godina osnivanja ne može biti veća od 2025.');
         return;
       }
 
       if (championships < 0) {
-        alert("Broj titula ne može biti negativan.");
+        alert('Broj titula ne može biti manji od 0.');
+        return;
+      }
+      if (championships > (currentYear - foundedYear)) {
+        alert("Broj osvojenih šampionata ne može biti veći od broja sezona od osnivanja tima.");
         return;
       }
 

@@ -47,7 +47,7 @@
     </nav>
     <h3>Dodaj Trku</h3>
     <form id="create">
-      
+
       <div class="mb-3">
         <label for="name" class="form-label">Naziv trke:</label>
         <input type="text" class="form-control" id="name" required>
@@ -62,15 +62,15 @@
       </div>
       <div class="mb-3">
         <label for="raceDate" class="form-label">Datum trke:</label>
-        <input type="date" class="form-control" id="raceDate" min="2025-01-01" max="2025-12-31" required>
+        <input type="date" class="form-control" id="raceDate" value="2025-01-01" required>
       </div>
       <div class="mb-3">
         <label for="lapLengthKm" class="form-label">Dužina kruga (km):</label>
-        <input type="number" class="form-control" id="lapLengthKm" min="1" value="1" step="0.001" required>
+        <input type="number" class="form-control" id="lapLengthKm"  value="1" step="0.001" required>
       </div>
       <div class="mb-3">
         <label for="lapCount" class="form-label">Broj krugova:</label>
-          <input type="number" class="form-control" id="lapCount" min="1" max="99" value="1" required>
+        <input type="number" class="form-control" id="lapCount"  value="1" required>
       </div>
       <div class="mb-3">
         <label for="racePicture" class="form-label">URL slike staze:</label>
@@ -97,20 +97,25 @@
       e.preventDefault();
 
       const lapLengthKm = parseFloat(document.getElementById('lapLengthKm').value);
-      const lapCount = parseInt(document.getElementById('lapCount').value);
+      const lapCount = Number(document.getElementById('lapCount').value);
       const raceDateStr = document.getElementById('raceDate').value;
+      const raceDate = new Date(raceDateStr);
 
-      if (!apLengthKm || lapLengthKm <= 0) {
-        alert("Dužina kruga mora biti pozitivan broj.");
+      if (lapLengthKm < 1) {
+        alert("Dužina kruga mora biti duža od 1 km.");
         return;
       }
 
-      if (!lapCount || lapCount <= 0) {
+      if (lapCount <= 0) {
         alert("Broj krugova mora biti veći od 0.");
         return;
       }
+      if (lapCount > 100) {
+        alert("Broj krugova ne sme biti veći od 99");
+        return;
+      }
 
-      if (!raceDateStr || raceDate.getFullYear() !== 2025) {
+      if (raceDate.getFullYear() !== 2025) {
         alert("Datum trke mora biti u 2025. godini.");
         return;
       }
