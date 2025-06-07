@@ -61,7 +61,7 @@
       </div>
       <div class="mb-3">
         <label for="driverNumber" class="form-label">Broj vozača:</label>
-        <input type="number" class="form-control" id="driverNumber" required min="1" step="1">
+        <input type="number" class="form-control" id="driverNumber" required min="1" step="1" max="99">
       </div>
       <div class="mb-3">
         <label for="nationality" class="form-label">Nacionalnost:</label>
@@ -73,7 +73,7 @@
       </div>
       <div class="mb-3">
         <label for="debutYear" class="form-label">Godina debija:</label>
-        <input type="number" class="form-control" id="debutYear" required min="1975" step="1">
+        <input type="number" class="form-control" id="debutYear" required min="1975" step="1" max="2025">
       </div>
       <div class="mb-3">
         <label for="worldTitles" class="form-label">Broj titula:</label>
@@ -83,15 +83,10 @@
         <label for="profileImage" class="form-label">URL slike profila:</label>
         <input type="text" class="form-control" id="profileImage" required>
       </div>
-      
+
       <div class="mb-3">
         <label for="team" class="form-label">Tim:</label>
         <select class="form-select" id="team" required></select>
-      </div>
-
-      <div class="mb-3">
-        <label for="profileImage" class="form-label">URL slike:</label>
-        <input type="text" class="form-control" id="profileImage">
       </div>
       <button type="submit" class="btn btn-success">
         <i class="fa-solid fa-floppy-disk"></i> Sačuvaj
@@ -145,23 +140,30 @@
         document.getElementById("edit").addEventListener("submit", function (e) {
           e.preventDefault();
 
-          const selectedTeamId = Number(teamSelect.value);
-          if (selectedTeamId === 0) {
+          const driverNumber = Number(document.getElementById('driverNumber').value);
+          const debutYear = Number(document.getElementById('debutYear').value);
+          const worldTitles = Number(document.getElementById('worldTitles').value);
+          const teamId = Number(teamSelect.value);
+          const dateOfBirth = document.getElementById('dateOfBirth').value;
+
+          if (teamId === 0) {
             alert("Molimo odaberite tim.");
             return;
           }
           if (driverNumber < 1) {
-            alert("Broj vozača mora biti pozitivan.");
+            alert("Broj vozača ne može biti manji od 1.");
             return;
           }
-
           if (debutYear < 1975) {
             alert("Godina debija ne može biti manja od 1975.");
             return;
           }
-
           if (worldTitles < 0) {
             alert("Broj titula ne može biti negativan.");
+            return;
+          }
+          if (new Date(dateOfBirth) < new Date('1970-01-01')) {
+            alert("Datum rođenja ne može biti pre 1970. godine.");
             return;
           }
 

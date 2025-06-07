@@ -66,15 +66,15 @@
       </div>
       <div class="mb-3">
         <label for="raceDate" class="form-label">Datum trke:</label>
-        <input type="date" class="form-control" id="raceDate">
+        <input type="date" class="form-control" id="raceDate" min="2025-01-01" max="2025-12-31" >
       </div>
       <div class="mb-3">
         <label for="lapLengthKm" class="form-label">Dužina kruga (km):</label>
-        <input type="number" class="form-control" id="lapLengthKm" step="0.001">
+        <input type="number" class="form-control" id="lapLengthKm" min="1"  step="0.001">
       </div>
       <div class="mb-3">
         <label for="lapCount" class="form-label">Broj krugova:</label>
-        <input type="number" class="form-control" id="lapCount">
+        <input type="number" class="form-control" id="lapCount" min="1" max="99">
       </div>
       <div class="mb-3">
         <label for="trackType" class="form-label">Tip staze:</label>

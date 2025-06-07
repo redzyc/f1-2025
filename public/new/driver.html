@@ -66,8 +66,9 @@
       </div>
       <div class="mb-3">
         <label for="dateOfBirth" class="form-label">Datum rođenja:</label>
-        <input type="date" class="form-control" id="dateOfBirth" required>
+        <input type="date" class="form-control" id="dateOfBirth" required min="1970-01-01">
       </div>
+
       <div class="mb-3">
         <label for="debutYear" class="form-label">Godina debija:</label>
         <input type="number" class="form-control" id="debutYear" required min="1975" step="1">
@@ -117,6 +118,7 @@
       const debutYear = Number(document.getElementById('debutYear').value);
       const worldTitles = Number(document.getElementById('worldTitles').value);
       const teamId = Number(teamSelect.value);
+      const dateOfBirth = document.getElementById('dateOfBirth').value;
 
       if (teamId === 0) {
         alert("Molimo odaberite tim.");
@@ -134,6 +136,11 @@
         alert("Broj titula ne može biti negativan.");
         return;
       }
+      if (new Date(dateOfBirth) < new Date('1970-01-01')) {
+        alert("Datum rođenja ne može biti pre 1970. godine.");
+        return;
+      }
+
 
       axios.request({
         url: `/api/drivers`,

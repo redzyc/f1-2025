@@ -42,11 +42,12 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/index.html">Home</a></li>
         <li class="breadcrumb-item"><a href="/index.html">Trke</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Izmeni Trku</li>
+        <li class="breadcrumb-item active" aria-current="page">Dodaj Trku</li>
       </ol>
     </nav>
     <h3>Dodaj Trku</h3>
     <form id="create">
+      
       <div class="mb-3">
         <label for="name" class="form-label">Naziv trke:</label>
         <input type="text" class="form-control" id="name" required>
@@ -61,19 +62,19 @@
       </div>
       <div class="mb-3">
         <label for="raceDate" class="form-label">Datum trke:</label>
-        <input type="date" class="form-control" id="raceDate" required>
+        <input type="date" class="form-control" id="raceDate" min="2025-01-01" max="2025-12-31" required>
       </div>
       <div class="mb-3">
         <label for="lapLengthKm" class="form-label">Dužina kruga (km):</label>
-        <input type="number" step="0.001" class="form-control" id="lapLengthKm" required>
+        <input type="number" class="form-control" id="lapLengthKm" min="1" value="1" step="0.001" required>
       </div>
       <div class="mb-3">
         <label for="lapCount" class="form-label">Broj krugova:</label>
-        <input type="number" class="form-control" id="lapCount" required>
+          <input type="number" class="form-control" id="lapCount" min="1" max="99" value="1" required>
       </div>
       <div class="mb-3">
         <label for="racePicture" class="form-label">URL slike staze:</label>
-        <input type="text" class="form-control" id="racePicture">
+        <input type="text" class="form-control" id="racePicture" required>
       </div>
       <div class="mb-3">
         <label for="trackType" class="form-label">Tip staze:</label>
@@ -110,12 +111,6 @@
       }
 
       if (!raceDateStr || raceDate.getFullYear() !== 2025) {
-        alert("Datum trke mora biti u 2025. godini.");
-        return;
-      }
-      const raceDate = new Date(raceDateStr);
-      const year = raceDate.getFullYear();
-      if (year !== 2025) {
         alert("Datum trke mora biti u 2025. godini.");
         return;
       }

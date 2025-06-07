@@ -48,47 +48,48 @@
 
     <h3>Novi Rezultat</h3>
     <form id="create">
-      <div class="mb-3">
-        <label for="driver" class="form-label">Vozač:</label>
-        <select class="form-select" id="driver"></select>
-      </div>
-      <div class="mb-3">
-        <label for="race" class="form-label">Trka:</label>
-        <select class="form-select" id="race"></select>
-      </div>
-      <div class="mb-3">
-        <label for="position" class="form-label">Pozicija:</label>
-        <input type="number" class="form-control" id="position" required min="1">
-      </div>
-      <div class="mb-3">
-        <label for="startingPosition" class="form-label">Startna pozicija:</label>
-        <input type="number" class="form-control" id="startingPosition" required min="1">
-      </div>
-      <div class="mb-3">
-        <label for="lapsCompleted" class="form-label">Završeni krugovi:</label>
-        <input type="number" class="form-control" id="lapsCompleted" required min="0">
-      </div>
-      <div class="mb-3">
-        <label for="pitStops" class="form-label">Pit Stopova:</label>
-        <input type="number" class="form-control" id="pitStops" required min="0">
-      </div>
-      <div class="mb-3">
-        <label for="status" class="form-label">Status:</label>
-        <select class="form-control" id="status" required>
-          <option value="FINISHED">FINISHED</option>
-          <option value="DNF">DNF</option>
-          <option value="DSQ">DSQ</option>
-          <option value="DNS">DNS</option>
-          <option value="NC">NC</option>
-          <option value="RETIRED">RETIRED</option>
-          <option value="LAP_DOWN">LAP_DOWN</option>
-        </select>
-      </div>
+  </div>
+  <div class="mb-3">
+    <label for="driver" class="form-label">Vozač:</label>
+    <select class="form-select" id="driver" required></select>
+  </div>
+  <div class="mb-3">
+    <label for="race" class="form-label">Trka:</label>
+    <select class="form-select" id="race" required></select>
+  </div>
+  <div class="mb-3">
+    <label for="position" class="form-label">Pozicija:</label>
+    <input type="number" class="form-control" id="position" required min="1" value="1" step="1">
+  </div>
+  <div class="mb-3">
+    <label for="startingPosition" class="form-label">Startna pozicija:</label>
+    <input type="number" class="form-control" id="startingPosition" required min="1" value="1" step="1">
+  </div>
+  <div class="mb-3">
+    <label for="lapsCompleted" class="form-label">Završeni krugovi:</label>
+    <input type="number" class="form-control" id="lapsCompleted" required value ="0" min="0" max="99">
+  </div>
+  <div class="mb-3">
+    <label for="pitStops" class="form-label">Broj Pit Stopova:</label>
+    <input type="number" class="form-control" id="pitStops" required min="1" value="1" step="1" max="9">
+  </div>
+  <div class="mb-3">
+    <label for="status" class="form-label">Status:</label>
+    <select class="form-control" id="status" required>
+      <option value="FINISHED">FINISHED</option>
+      <option value="DNF">DNF</option>
+      <option value="DSQ">DSQ</option>
+      <option value="DNS">DNS</option>
+      <option value="NC">NC</option>
+      <option value="RETIRED">RETIRED</option>
+      <option value="LAP_DOWN">LAP_DOWN</option>
+    </select>
+  </div>
 
-      <button type="submit" class="btn btn-success">
-        <i class="fa-solid fa-plus"></i> Dodaj Rezultat
-      </button>
-    </form>
+  <button type="submit" class="btn btn-success">
+    <i class="fa-solid fa-plus"></i> Dodaj Rezultat
+  </button>
+  </form>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
