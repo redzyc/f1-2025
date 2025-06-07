@@ -158,6 +158,12 @@
         alert("Vozač mora imati najmanje 16 godina kada je debitovao.");
         return;
       }
+      if (worldTitles > (currentYear - debutYear)) {
+        alert(`Broj osvojenih šampionata ne može biti veći od broja sezona od debitovanja. Vozač može maksimalno da osvoji ${(currentYear - debutYear)}`);
+        return;
+      }
+
+
 
 
 
